@@ -262,3 +262,4 @@ terraform.tfstate.*
 # Credentials
 *.json
 .env
+.bruin.yml
