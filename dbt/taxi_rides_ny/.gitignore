@@ -1,0 +1,11 @@
+
+target/
+dbt_packages/
+logs/
+
+# Data directory
+data/
+*.duckdb
+*.duckdb.wal
+*.duckdb.tmp
+*.cvs
