@@ -266,3 +266,22 @@ terraform.tfstate.*
 logs/runs
 logs/*.log
 *.py[cod]
+
+# data files
+*.parquet
+*.csv
+*.crc
+*.gz
+*.json.gz
+*.tar.gz
+
+# macOS metadata
+._*
+
+# common data folders
+data/
+pq/
+output/
+tmp/
+fhvhv/
+report-*/
