@@ -1,5 +1,4 @@
 services:
-
   redpanda:
     image: redpandadata/redpanda:v25.3.9
     command:
@@ -29,15 +28,6 @@ services:
       - 9092:9092
       - 28082:28082
       - 29092:29092
-  postgres:
-    image: postgres:18
-    restart: on-failure
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
 
   jobmanager:
     build:
@@ -78,3 +68,13 @@ services:
         taskmanager.memory.process.size: 1728m
         taskmanager.numberOfTaskSlots: 15
         parallelism.default: 3
+
+  postgres:
+    image: postgres:18
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"

@@ -9,3 +9,8 @@ dependencies = [
     "wget",
     "notebook",
 ]
+
+[tool.uv.workspace]
+members = [
+    "streaming",
+]
