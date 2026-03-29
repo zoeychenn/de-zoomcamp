@@ -9,7 +9,7 @@ from kafka import KafkaConsumer
 from models import ride_deserializer
 
 server = 'localhost:9092'
-topic_name = 'rides'
+topic_name = 'green-trips'
 
 # Connect to PostgreSQL
 conn = psycopg2.connect(
@@ -38,10 +38,10 @@ for message in consumer:
     pickup_dt = datetime.fromtimestamp(ride.tpep_pickup_datetime / 1000)
     cur.execute(
         """INSERT INTO processed_events
-           (PULocationID, DOLocationID, trip_distance, total_amount, pickup_datetime)
+           (PULocationID, DOLocationID, trip_distance, total_amount, pickup_datetime, dropoff_datetime, passenger_count, tip_amount)
            VALUES (%s, %s, %s, %s, %s)""",
         (ride.PULocationID, ride.DOLocationID,
-         ride.trip_distance, ride.total_amount, pickup_dt)
+         ride.trip_distance, ride.total_amount, ride.lpep_pickup_datetime, ride.lpep_dropoff_datetime, ride.passenger_count, ride.tip_amount)
     )
     count += 1
     if count % 100 == 0:

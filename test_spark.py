@@ -14,4 +14,4 @@ df = spark.range(10)
 spark.version
 df.show()
 
-# spark.stop()
+spark.stop()

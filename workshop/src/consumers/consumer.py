@@ -8,7 +8,7 @@ from kafka import KafkaConsumer
 from models import ride_deserializer
 
 server = 'localhost:9092'
-topic_name = 'rides'
+topic_name = 'green-trips'
 
 consumer = KafkaConsumer(
     topic_name,
@@ -24,9 +24,10 @@ count = 0
 for message in consumer:
     ride = message.value
     pickup_dt = datetime.fromtimestamp(ride.tpep_pickup_datetime / 1000)
+    dropoff_dt = datetime.fromtimestamp(ride.lpep_dropoff_datetime / 1000)
     print(f"Received: PU={ride.PULocationID}, DO={ride.DOLocationID}, "
-          f"distance={ride.trip_distance}, amount=${ride.total_amount:.2f}, "
-          f"pickup={pickup_dt}")
+          f"distance={ride.trip_distance}, total_amount=${ride.total_amount:.2f}, "
+          f"pickup={pickup_dt}, dropoff={dropoff_dt}, passenger_count={ride.passenger_count}, tip_amount=${ride.tip_amount:.2f}")
     count += 1
     if count >= 10:
         print(f"\n... received {count} messages so far (stopping after 10 for demo)")
